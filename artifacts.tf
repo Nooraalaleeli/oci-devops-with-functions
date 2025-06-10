@@ -1,4 +1,4 @@
-resource "oci_artifacts_container_repository" "test_container_repository" {
+/* resource "oci_artifacts_container_repository" "test_container_repository" {
   #Required
   compartment_id = var.compartment_ocid
   display_name   = "oci-function-python-defaultimage-${random_id.tag.hex}"
@@ -11,7 +11,7 @@ resource "oci_artifacts_container_repository" "test_container_repository2" {
   compartment_id = var.compartment_ocid
   display_name   = "oci-function-python-customimage-${random_id.tag.hex}"
   #Optional
-  is_public = var.container_repository_is_public
+  is_public = var.container_repository_is_public */
 }
 
 resource "oci_devops_deploy_artifact" "test_deploy_artifact_default" {
