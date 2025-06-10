@@ -13,6 +13,20 @@ resource "oci_artifacts_container_repository" "test_container_repository" {
   repository_type = "DOCKER"
 }
 
+resource "oci_artifacts_container_repository" "test_container_repository" {
+  compartment_id  = var.compartment_ocid
+  display_name    = "test-container-repo"
+  is_public       = false
+  repository_type = "DOCKER"
+}
+
+resource "oci_artifacts_container_repository" "test_container_repository2" {
+  compartment_id  = var.compartment_ocid
+  display_name    = "test-container-repo-2"
+  is_public       = false
+  repository_type = "DOCKER"
+}
+
 resource "oci_artifacts_container_repository" "test_container_repository2" {
   compartment_id = var.compartment_ocid
   display_name   = "test-container-repo-2"
