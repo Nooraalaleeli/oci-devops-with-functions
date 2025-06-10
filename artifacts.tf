@@ -23,3 +23,16 @@ resource "oci_devops_deploy_artifact" "test_deploy_artifact_custom" {
   project_id           = oci_devops_project.test_project.id
   display_name         = "artifact-custom"
 }
+
+resource "oci_artifacts_container_repository" "test_container_repository" {
+  compartment_id = var.compartment_ocid
+  display_name   = "test-container-repo"
+  is_public      = false
+}
+
+resource "oci_artifacts_container_repository" "test_container_repository2" {
+  compartment_id = var.compartment_ocid
+  display_name   = "test-container-repo-2"
+  is_public      = false
+}
+
