@@ -21,23 +21,20 @@ terraform {
 }
 
 provider "oci" {
-            tenancy-ocid = var.tenancy-ocid
-            region       = var.region
+  alias            = "home_region"
+  region           = var.home_region
+  tenancy_ocid     = var.tenancy_ocid
+  user_ocid        = var.user_ocid
+  fingerprint      = var.fingerprint
+  private_key_path = var.private_key_path
+}
 
-            }
+provider "oci" {
+  alias            = "current_region"
+  region           = var.region
+  tenancy_ocid     = var.tenancy_ocid
+  user_ocid        = var.user_ocid
+  fingerprint      = var.fingerprint
+  private_key_path = var.private_key_path
+}
 
-            provider "oci" {
-            alias        = "home-region"
-            tenancy-ocid = var.tenancy-ocid
-            region       = lookup(data.oci-identity-regions.home-region.regions[0], "name")
-
-
-            }
-
-            provider "oci" {
-            alias        = "current-region"
-            tenancy-ocid = var.tenancy-ocid
-            region       = var.region
-
-
-            }
