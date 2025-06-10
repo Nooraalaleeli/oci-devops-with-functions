@@ -1,1 +1,7 @@
+tenancy_ocid     = "ocid1.tenancy.oc1..xxxx"
+user_ocid        = "ocid1.user.oc1..xxxx"
+fingerprint      = "xx:xx:xx:xx:xx"
 private_key_path = "/home/opc/.ssh/id_rsa"
+region           = "us-ashburn-1"
+home_region      = "us-ashburn-1"
+compartment_ocid = "ocid1.compartment.oc1..xxxx"
