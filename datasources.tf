@@ -30,9 +30,7 @@ data "oci_core_services" "all_services" {
 }
 
 # Object Storage Namespace — uses tenancy OCID, not compartment
-data "oci_objectstorage_namespace" "os_namespace" {
-  compartment_id = var.tenancy_ocid
-}
+data "oci_objectstorage_namespace" "os_namespace" {}
 
 # Random value generator
 resource "random_string" "deploy_id" {
