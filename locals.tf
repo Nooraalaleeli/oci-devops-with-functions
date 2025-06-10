@@ -13,6 +13,6 @@ locals {
 
 locals {
   allow_devops_manage_compartment_statements = [
-    "Allow dynamic-group ${local.devops_pipln_dg} to manage all-resources in tenancy"
+    "Allow dynamic-group your-dg-name-here to manage all-resources in tenancy"
   ]
 }
