@@ -1,35 +1,9 @@
 ## Copyright (c) 2021, Oracle and/or its affiliates.
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
-
-
-variable "tenancy_ocid" {
-  type = string
-}
-
-variable "user_ocid" {
-  type = string
-}
-
-variable "fingerprint" {
-  type = string
-}
-
-variable "region" {
-  type = string
-}
-
-variable "home_region" {
-  type = string
-}
-
-variable "private_key_path" {
-  type = string
-}
-
-variable "compartment_ocid" {
-  type = string
-}
+variable "tenancy_ocid" {}
+variable "compartment_ocid" {}
+variable "region" {}
 
 variable "app_name" {
   default     = "oci-function-cicd"
@@ -42,6 +16,7 @@ variable "release" {
 }
 
 variable "execute_deployment" {
+  #  default = false
   default = true
 }
 
@@ -53,9 +28,11 @@ variable "app_version2" {
   default = "0.0.2"
 }
 
+# ORM Schema visual control variables
 variable "show_advanced" {
   default = false
 }
+
 
 variable "VCN-CIDR" {
   default = "10.0.0.0/16"
@@ -66,27 +43,35 @@ variable "fnsubnet-CIDR" {
 }
 
 variable "oci_user_name" {
+  #sensitive = true
   default = ""
 }
 
 variable "oci_user_authtoken" {
+  #sensitive = true
   default = ""
 }
 
 # OCIR repo name & namespace
 
+locals {
+  ocir_docker_repository = join("", [lower(lookup(data.oci_identity_regions.oci_regions.regions[0], "key")), ".ocir.io"])
+  ocir_namespace         = lookup(data.oci_objectstorage_namespace.os_namespace, "namespace")
+}
+
+## Copyright (c) 2021, Oracle and/or its affiliates.
+## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
+
+# Create Dynamic Group and Policies
 variable "create_dynamic_group_for_nodes_in_compartment" {
   default = true
 }
-
 variable "existent_dynamic_group_for_nodes_in_compartment" {
   default = ""
 }
-
 variable "create_compartment_policies" {
   default = true
 }
-
 variable "create_tenancy_policies" {
   default = true
 }
@@ -111,6 +96,7 @@ variable "deploy_stage_namespace" {
   default = "default"
 }
 
+
 variable "repository_name" {
   default = "python-function-helloworld"
 }
@@ -120,7 +106,7 @@ variable "repository_default_branch" {
 }
 
 variable "repository_description" {
-  default = "Sample code for oci function with python"
+  default = "Sample code for oci function with python "
 }
 
 variable "git_repo" {
@@ -162,7 +148,6 @@ variable "build_pipeline_stage_build_pipeline_stage_predecessor_collection_items
 variable "build_pipeline_stage_build_pipeline_stage_type" {
   default = "BUILD"
 }
-
 variable "build_pipeline_stage_image" {
   default = "OL7_X86_64_STANDARD_10"
 }
@@ -190,7 +175,6 @@ variable "build_pipeline_stage_build_source_collection_items_connection_type" {
 variable "build_pipeline_stage_build_source_collection_items_name" {
   default = "oci-sample-function-with-python"
 }
-
 variable "build_pipeline_stage_deliver_artifact_stage_type" {
   default = "DELIVER_ARTIFACT"
 }
@@ -210,33 +194,26 @@ variable "deliver_artifact_stage_display_name" {
 variable "container_repository_is_public" {
   default = true
 }
-
 variable "deploy_artifact_argument_substitution_mode" {
   default = "SUBSTITUTE_PLACEHOLDERS"
 }
-
 variable "deploy_artifact_deploy_artifact_source_deploy_artifact_source_type" {
   default = "OCIR"
 }
-
 variable "deploy_artifact_deploy_artifact_type" {
   default = "DOCKER_IMAGE"
 }
-
 variable "deploy_pipeline_deploy_pipeline_parameters_items_name" {
   default = "BUILDRUN_HASH"
 }
-
 variable "deploy_pipeline_deploy_pipeline_parameters_items_default_value" {
   default = "example"
 }
-
 variable "deploy_pipeline_deploy_pipeline_parameters_items_description" {
-  default = "Tag for docker image"
+  default = "Tag for docker image "
 }
-
 variable "deploy_pipeline_description" {
-  default = "Devops CI/CD Pipeline demo for functions"
+  default = "Devops CI/CD Pipleline demo for functions"
 }
 
 variable "build_pipeline_stage_deploy_stage_type" {
@@ -246,7 +223,6 @@ variable "build_pipeline_stage_deploy_stage_type" {
 variable "deploy_stage_display_name" {
   default = "Invoke-Deployment"
 }
-
 variable "build_pipeline_stage_is_pass_all_parameters_enabled" {
   default = true
 }
@@ -258,11 +234,9 @@ variable "trigger_actions_type" {
 variable "trigger_state" {
   default = "ACTIVE"
 }
-
 variable "trigger_trigger_source" {
   default = "DEVOPS_CODE_REPOSITORY"
 }
-
 variable "trigger_trigger_input_event_type" {
   default = "PUSH"
 }
